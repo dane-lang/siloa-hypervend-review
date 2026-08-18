@@ -3,25 +3,23 @@
    Firestore project: siloa-review-notes
    Modular v10 CDN imports.
 
-   >>> ACTION REQUIRED <<<
-   Replace the placeholder values below with the firebaseConfig
-   object from the Firebase console:
-     Project settings -> General -> Your apps -> Web app -> SDK setup
-   Nothing else in this file needs to change. Until real values are
-   pasted, the pages render normally and the notes layer reports
-   that it is not yet connected instead of erroring.
+   Config below is live, from web app siloa-review-notes-web.
+   Firestore: (default) database, Native mode, location nam5.
+   If the values are ever replaced with PASTE_ placeholders again,
+   the pages still render and the notes layer reports that it is
+   not connected rather than erroring.
    ============================================================ */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 export const firebaseConfig = {
-  apiKey:            "PASTE_API_KEY",
+  apiKey:            "AIzaSyCentpfoX2f8PRm3YVxphOHVeVVW-WfU6A",
   authDomain:        "siloa-review-notes.firebaseapp.com",
   projectId:         "siloa-review-notes",
-  storageBucket:     "siloa-review-notes.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId:             "PASTE_APP_ID"
+  storageBucket:     "siloa-review-notes.firebasestorage.app",
+  messagingSenderId: "74984759139",
+  appId:             "1:74984759139:web:4a91e36829cb035511bd56"
 };
 
 /* SHA-256 of the shared notes passphrase. Placeholder below is the
