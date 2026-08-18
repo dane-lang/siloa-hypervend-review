@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siloa × HyperVend — In-Building Placement Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="placement">
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="nav-mark">Siloa × HyperVend</span>
+    <a href="index.html">Landing</a>
+    <a href="proforma.html">Pro Forma</a>
+    <a href="placement.html" class="on" aria-current="page">Placement Matrix</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <div class="brand">Siloa Facility Services</div>
+    <div class="brand-sub">Healthcare Facility Maintenance • Florida</div>
+    <h1>In-Building Placement Matrix</h1>
+    <p class="doc-sub">Where a unit sits inside a hospital decides which volume tier it lives in. This is how we read a building: foot traffic on one axis, reason-to-buy on the other, and the timing pattern that governs both.</p>
+    <div class="meta">Prepared for joint review &nbsp;•&nbsp; August 2026 &nbsp;•&nbsp; <span class="conf">Joint working document — Siloa × HyperVend</span></div>
+    <hr class="rule">
+  </header>
+
+  <section>
+    <div class="eyebrow">Traffic × Intent</div>
+    <h2>Not All Foot Traffic Is Worth the Same</h2>
+    <div class="context">Volume alone does not sell flowers. The zones that convert are the ones where high foot traffic overlaps with a reason to arrive carrying something. The upper-right quadrant is where a unit earns its medium and high tier numbers; the lower-right moves people past the glass without giving them an occasion.</div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 800 520" role="img" aria-labelledby="gridTitle gridDesc">
+        <title id="gridTitle">Placement zones plotted by foot traffic against purchase intent</title>
+        <desc id="gridDesc">Seven in-building zones plotted on two axes. Maternity and women's center, main lobby and front entrance, surgical and procedural waiting, and the elevator bank and main corridor fall inside the prime placement zone where high traffic meets high purchase intent. Emergency department waiting, cafeteria and food court, and the staff entrance and break area fall outside it.</desc>
+
+        <!-- plot frame -->
+        <rect x="90" y="40" width="670" height="400" fill="#fafbfc" stroke="#e3e8ee" stroke-width="1"/>
+
+        <!-- gridlines -->
+        <g stroke="#e3e8ee" stroke-width="1">
+          <line x1="90"  y1="140" x2="760" y2="140"/>
+          <line x1="90"  y1="240" x2="760" y2="240"/>
+          <line x1="90"  y1="340" x2="760" y2="340"/>
+          <line x1="257" y1="40"  x2="257" y2="440"/>
+          <line x1="425" y1="40"  x2="425" y2="440"/>
+          <line x1="592" y1="40"  x2="592" y2="440"/>
+        </g>
+
+        <!-- prime placement zone -->
+        <rect x="412" y="60" width="315" height="190" rx="10"
+              fill="#1470AF" fill-opacity="0.07" stroke="#1470AF" stroke-width="2" stroke-dasharray="7 5"/>
+        <text x="424" y="82" font-family="Manrope, sans-serif" font-weight="800" font-size="12.5"
+              letter-spacing="1.6" fill="#1470AF">PRIME PLACEMENT ZONE</text>
+
+        <!-- axes -->
+        <g stroke="#8EB6DC" stroke-width="2">
+          <line x1="90" y1="440" x2="760" y2="440"/>
+          <line x1="90" y1="40"  x2="90"  y2="440"/>
+        </g>
+        <text x="425" y="483" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800"
+              font-size="13.5" letter-spacing="1.2" fill="#1a1d21">FOOT TRAFFIC VOLUME &#8594;</text>
+        <text x="34" y="240" text-anchor="middle" transform="rotate(-90 34 240)" font-family="Manrope, sans-serif"
+              font-weight="800" font-size="13.5" letter-spacing="1.2" fill="#1a1d21">PURCHASE INTENT &#8594;</text>
+        <g font-family="Poppins, sans-serif" font-size="11.5" fill="#5c6570">
+          <text x="96"  y="459">Lower</text>
+          <text x="754" y="459" text-anchor="end">Higher</text>
+          <text x="62"  y="437" text-anchor="end">Low</text>
+          <text x="62"  y="52"  text-anchor="end">High</text>
+        </g>
+
+        <!-- zone nodes -->
+        <g font-family="Poppins, sans-serif" font-size="13" fill="#1a1d21">
+
+          <!-- inside the prime zone -->
+          <g>
+            <circle cx="532" cy="100" r="9" fill="#1470AF"/>
+            <text x="551" y="96">Maternity &amp;</text>
+            <text x="551" y="112">women&#8217;s center</text>
+          </g>
+          <g>
+            <circle cx="452" cy="150" r="9" fill="#1470AF"/>
+            <text x="471" y="146">Surgical &amp;</text>
+            <text x="471" y="162">procedural waiting</text>
+          </g>
+          <g>
+            <circle cx="572" cy="188" r="9" fill="#1470AF"/>
+            <text x="591" y="184">Main lobby &amp;</text>
+            <text x="591" y="200">front entrance</text>
+          </g>
+          <g>
+            <circle cx="613" cy="232" r="9" fill="#1470AF"/>
+            <text x="632" y="228">Elevator bank &amp;</text>
+            <text x="632" y="244">main corridor</text>
+          </g>
+
+          <!-- outside the prime zone -->
+          <g>
+            <circle cx="311" cy="320" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
+            <text x="330" y="316">Staff entrance</text>
+            <text x="330" y="332">&amp; break area</text>
+          </g>
+          <g>
+            <circle cx="680" cy="308" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
+            <text x="661" y="304" text-anchor="end">Emergency</text>
+            <text x="661" y="320" text-anchor="end">department waiting</text>
+          </g>
+          <g>
+            <circle cx="626" cy="368" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
+            <text x="645" y="364">Cafeteria &amp;</text>
+            <text x="645" y="380">food court</text>
+          </g>
+        </g>
+      </svg>
+
+      <div class="legend">
+        <span class="li"><span class="sw prime"></span> Zone inside the prime placement window</span>
+        <span class="li"><span class="sw sec"></span> Zone outside it — traffic without a matching occasion</span>
+        <span class="li"><span class="sw box"></span> Prime placement zone: high traffic × high intent</span>
+      </div>
+    </div>
+
+    <span class="note block">Emergency department waiting is the trap: it posts the highest raw counts in the building and the lowest reason to buy. People arrive there without an occasion.</span>
+  </section>
+
+  <section>
+    <div class="eyebrow">Timing</div>
+    <h2>When the Building Is Actually Buying</h2>
+    <div class="context">Placement sets the ceiling; timing sets how often that ceiling gets hit. Three patterns matter — the evening visitor window, the shift-change surges, and the hours the gift shop is not open to serve either of them.</div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="v">5&ndash;8 pm</div>
+        <div class="l">Peak visitor window — the densest arrival block of the day, and the one most likely to arrive empty-handed</div>
+      </div>
+      <div class="stat">
+        <div class="v sm">7a &middot; 3p &middot; 5p &middot; 7p &middot; 11p</div>
+        <div class="l">All-shift surge times — five distinct movement peaks as the building changes over</div>
+      </div>
+      <div class="stat">
+        <div class="v">~115 hrs/wk</div>
+        <div class="l">Hours the gift shop sits dark — demand that arrives outside staffed retail hours has nowhere to go</div>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <h3>The surge stat covers the whole workforce</h3>
+      <p>The five surge times are not day-shift only. Taken together they capture every shift change in the building — clinical and non-clinical, days, evenings and overnight. A unit placed on a main circulation path sees all five, which is what separates a machine that is available from a machine that is passed.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Where We Are Honest About the Model</div>
+    <h2>Two Caveats Worth Stating Up Front</h2>
+    <div class="context">The grid above is a working read, not a measured result. Two points in it are assumptions we would rather name now than defend later.</div>
+
+    <div class="caveats">
+      <div class="caveat">
+        <b>The maternity rank is a pilot hypothesis, not a measured result.</b>
+        Placing maternity and the women&#8217;s center at the top of the intent axis reflects our reading of who walks that corridor and why. It has not been validated against unit-level sales data. The first placements should be structured to test it, and the ranking should move if the data says it belongs elsewhere.
+      </div>
+      <div class="caveat">
+        <b>Visiting hours close around 8 pm.</b>
+        The 5&ndash;8 pm visitor window ends where visiting hours end, so the tail of that block is truncated rather than open-ended. The later surge times (7 pm and 11 pm) are staff movement, not visitors, and should be modeled as a different buyer with a different basket.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Zone rankings are working estimates based on circulation patterns and stated assumptions, not measured sales data. Actual results will vary by building, layout, product mix, and operational execution. This document is not a guarantee of performance.<br><br>
+    <b>Joint working document — Siloa × HyperVend</b> — August 2026
+  </footer>
+
+</div>
+
+<script type="module" src="assets/notes.js"></script>
+</body>
+</html>

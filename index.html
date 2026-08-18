@@ -3,302 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Siloa × HyperVend — Working Pro Forma v2.0 (Joint Review)</title>
+<title>Siloa × HyperVend — Joint Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --blue: #1470AF; --steel: #8EB6DC; --ink: #1a1d21; --gray: #5c6570;
-    --bg: #fafbfc; --card: #ffffff; --line: #e3e8ee; --shade: #eef2f6;
-    --red: #C0392B; --green-ok: #1e7a45; --amber: #fff8f0;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Poppins', sans-serif; font-size: 15px; color: var(--ink); background: var(--bg); line-height: 1.6; }
-  .page { max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; }
-  .brand { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.12em; color: var(--blue); text-transform: uppercase; }
-  .brand-sub { color: var(--gray); font-size: 13.5px; margin-bottom: 22px; }
-  h1 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 29px; line-height: 1.2; margin-bottom: 6px; }
-  .ver-tag { font-size: 15px; font-family: 'Manrope', sans-serif; vertical-align: middle; }
-  .doc-sub { font-size: 15px; color: var(--gray); max-width: 660px; }
-  .meta { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--gray); }
-  .meta .conf { color: #999; letter-spacing: 0.08em; }
-  .rule { border: none; border-top: 2px solid var(--steel); margin: 26px 0 0; }
-  section { margin-top: 44px; }
-  .eyebrow { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
-  h2 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 22px; margin-bottom: 10px; }
-  .context { font-size: 14px; color: var(--gray); background: var(--shade); border-left: 3px solid var(--steel); padding: 12px 16px; border-radius: 0 6px 6px 0; margin-bottom: 18px; max-width: 800px; }
-  .note { font-family: 'Caveat', cursive; font-weight: 600; color: var(--red); font-size: 18px; line-height: 1.3; display: inline-block; }
-  .note::before { content: "\270E "; }
-  .note.block { display: block; margin: 14px 0 0; padding: 10px 16px; background: #fdf3f2; border: 1px dashed #e4b6b0; border-radius: 8px; font-size: 19px; max-width: 800px; transform: rotate(-0.35deg); }
-  td .note { font-size: 16.5px; display: block; margin-top: 3px; }
-  .tbl-wrap { overflow-x: auto; border-radius: 8px; box-shadow: 0 1px 3px rgba(16,32,48,0.08); }
-  table { width: 100%; border-collapse: collapse; background: var(--card); font-size: 14px; }
-  th { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; background: var(--blue); color: #fff; text-align: left; padding: 10px 14px; white-space: nowrap; }
-  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  td { padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tr:nth-child(even) td { background: #f6f8fa; }
-  tr.total td { font-weight: 600; font-family: 'Manrope', sans-serif; background: var(--shade); border-top: 2px solid var(--steel); }
-  td.neg { color: var(--red); }
-  td.pos { color: var(--green-ok); font-weight: 600; }
-  .changed { background: var(--amber) !important; }
-  .tbd { display: inline-block; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: .08em; background: #fff3cd; color: #7a5d00; border: 1px solid #e8d48a; border-radius: 4px; padding: 1px 6px; vertical-align: middle; margin-left: 6px; }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 18px; }
-  .stat { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: 8px; padding: 16px 18px; }
-  .stat .v { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 24px; color: var(--blue); }
-  .stat .l { font-size: 12.5px; color: var(--gray); margin-top: 2px; }
-  .callout { margin-top: 26px; background: #fdf3f2; border: 2px solid var(--red); border-radius: 10px; padding: 18px 22px; }
-  .callout.blue { background: #eef5fb; border-color: var(--blue); }
-  .callout h3 { font-family: 'Manrope', sans-serif; font-size: 16px; color: var(--red); margin-bottom: 6px; }
-  .callout.blue h3 { color: var(--blue); }
-  footer { margin-top: 56px; font-size: 12.5px; color: var(--gray); border-top: 1px solid var(--line); padding-top: 16px; }
-  @media print { body { background: #fff; } .page { padding: 0; max-width: none; } .tbl-wrap { box-shadow: none; } }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="nav-mark">Siloa × HyperVend</span>
+    <a href="index.html" class="on" aria-current="page">Landing</a>
+    <a href="proforma.html">Pro Forma</a>
+    <a href="placement.html">Placement Matrix</a>
+  </div>
+</nav>
+
 <div class="page">
 
   <header>
     <div class="brand">Siloa Facility Services</div>
     <div class="brand-sub">Healthcare Facility Maintenance • Florida</div>
-    <h1>Unit Economics Pro Forma <span class="ver-tag" style="color:#1470AF;">— v2.0 JOINT REVIEW DRAFT</span></h1>
-    <p class="doc-sub">Three-tier volume model incorporating both HyperVend pro formas and Siloa operating assumptions. Open research items flagged TBD for joint resolution.</p>
-    <div class="meta">Prepared for Dane Grove &amp; Christina Grove &nbsp;•&nbsp; v2.0 — August 2026 &nbsp;•&nbsp; <span class="conf">CONFIDENTIAL</span></div>
-    <span class="note block">Volume tier is the key planning variable: the same machine earns $6K–$34K depending on placement quality. Open items for alignment are flagged throughout.</span>
+    <h1>Siloa × HyperVend <span class="ver-tag">— Joint Review</span></h1>
+    <p class="doc-sub">Two working documents for our next conversation: the unit economics the program has to clear, and the in-building placement read that decides which set of numbers a machine lives in.</p>
+    <div class="meta">August 2026 &nbsp;•&nbsp; <span class="conf">Joint working document — Siloa × HyperVend</span></div>
     <hr class="rule">
   </header>
 
-  <section>
-    <div class="eyebrow">Model Assumptions — v2.0</div>
-    <h2>What Changed and What Is Still Open</h2>
-    <div class="context">v2.0 aligns the planning basis with the HyperVend figures ($55 / $32) and structures volume as three tiers. Spoilage scales with turn rate. Items still under research are flagged TBD.</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Assumption</th><th class="num">v2.0 Value</th><th class="num">Prior v1.0</th><th>Notes</th></tr>
-        <tr class="changed"><td>Volume tiers</td><td class="num"><b>1.5 / 3.5 / 5.5 per day</b></td><td class="num">2.5 / 3.5 / 5.0</td><td>Low tier aligns with HyperVend "Slow but Viable"</td></tr>
-        <tr class="changed"><td>Average bouquet sale price</td><td class="num"><b>$55.00</b></td><td class="num">$45.00</td><td>Hospital mix $30–$120 <span class="note">per Dane — premium placement positioning</span></td></tr>
-        <tr class="changed"><td>Average bouquet cost (COGS)</td><td class="num"><b>$32.00</b></td><td class="num">$18.00</td><td><span class="note">supply channel structure is the key open item — see final section</span></td></tr>
-        <tr><td>Gross margin per bouquet</td><td class="num">$23 / 42%</td><td class="num">$27 / 60%</td><td>Follows from price and COGS</td></tr>
-        <tr class="changed"><td>Spoilage — tiered</td><td class="num"><b>15% / 10% / 8%</b></td><td class="num">10% flat</td><td>Slow turns age out more stems <span class="note">spoilage is highest exactly where volume is lowest</span></td></tr>
-        <tr><td>Card processing<span class="tbd">TBD</span></td><td class="num">3% placeholder</td><td class="num">3%</td><td>Confirm unattended CNP rate with bank</td></tr>
-        <tr class="changed"><td>Restocking labor<span class="tbd">TBD</span></td><td class="num"><b>$1,250/yr placeholder</b></td><td class="num">$2,500/yr</td><td><span class="note">cleaning-route synergy is real; placeholder midpoint pending Siloa time study</span></td></tr>
-        <tr class="changed"><td>Electricity<span class="tbd">TBD</span></td><td class="num"><b>$250/yr</b></td><td class="num">$500/yr</td><td>Validate against unit kWh spec; confirm who pays — Siloa or host</td></tr>
-        <tr class="changed"><td>Maintenance &amp; parts</td><td class="num"><b>$200/yr</b></td><td class="num">$750/yr</td><td>Per Dane</td></tr>
-        <tr><td>Insurance rider<span class="tbd">TBD</span></td><td class="num">$400/yr placeholder</td><td class="num">$400/yr</td><td>Quote endorsement + additional-insured cert from Siloa agent</td></tr>
-        <tr><td>Software / NOC</td><td class="num">$0 waived</td><td class="num">$0 waived</td><td>Confirm waiver in writing</td></tr>
-      </table>
-    </div>
-  </section>
+  <section style="margin-top:32px">
+    <div class="cards">
 
-  <section>
-    <div class="eyebrow">Annual P&amp;L by Volume Tier</div>
-    <h2>What One Machine Makes at Each Tier</h2>
-    <div class="context">Same machine, same costs — the only variable is how many people walk past it with a reason to buy. Placement quality decides which column a unit lives in.</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Line Item</th><th class="num">Low — 1.5/day</th><th class="num">Medium — 3.5/day</th><th class="num">High — 5.5/day</th></tr>
-        <tr><td>Bouquets sold / year</td><td class="num">548</td><td class="num">1,278</td><td class="num">2,008</td></tr>
-        <tr><td>Gross revenue</td><td class="num">$30,112</td><td class="num">$70,262</td><td class="num">$110,412</td></tr>
-        <tr><td>COGS (bouquets sold)</td><td class="num neg">($17,520)</td><td class="num neg">($40,880)</td><td class="num neg">($64,240)</td></tr>
-        <tr><td>Spoilage (15% / 10% / 8%)</td><td class="num neg">($3,092)</td><td class="num neg">($4,542)</td><td class="num neg">($5,586)</td></tr>
-        <tr class="total"><td>Gross profit</td><td class="num">$9,500</td><td class="num">$24,840</td><td class="num">$40,586</td></tr>
-        <tr><td>Card processing (3%)</td><td class="num neg">($903)</td><td class="num neg">($2,108)</td><td class="num neg">($3,312)</td></tr>
-        <tr><td>Restocking labor (placeholder)</td><td class="num neg">($1,250)</td><td class="num neg">($1,250)</td><td class="num neg">($1,250)</td></tr>
-        <tr><td>Electricity</td><td class="num neg">($250)</td><td class="num neg">($250)</td><td class="num neg">($250)</td></tr>
-        <tr><td>Maintenance &amp; parts</td><td class="num neg">($200)</td><td class="num neg">($200)</td><td class="num neg">($200)</td></tr>
-        <tr><td>Insurance rider</td><td class="num neg">($400)</td><td class="num neg">($400)</td><td class="num neg">($400)</td></tr>
-        <tr class="total"><td>Net before hospital fee</td><td class="num pos">$6,497</td><td class="num pos">$20,632</td><td class="num pos">$35,174</td></tr>
-      </table>
-    </div>
-  </section>
+      <a class="card-link" href="proforma.html">
+        <div class="k">Document 01</div>
+        <h3>Unit Economics Pro Forma</h3>
+        <p>Three volume tiers against one machine: annual P&amp;L, the five-structure fee matrix, financing coverage at every tier, scenario alignment, and the open research items still to close before contract.</p>
+        <div class="go">Open the pro forma &#8594;</div>
+      </a>
 
-  <section>
-    <div class="eyebrow">Fee Matrix</div>
-    <h2>Net Income: Volume Tier × Hospital Fee</h2>
-    <div class="context">Five fee structures against three tiers — including the 5% midpoint from HyperVend's worst-case fee range. The 4% philanthropic structure (2% hospital / 2% employee 501(c)(3) fund) remains the recommended placement mechanism.</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Fee Structure</th><th class="num">Low — 1.5/day</th><th class="num">Medium — 3.5/day</th><th class="num">High — 5.5/day</th></tr>
-        <tr><td>No fee</td><td class="num">$6,497</td><td class="num">$20,632</td><td class="num">$35,174</td></tr>
-        <tr class="total"><td>1% revenue share</td><td class="num pos">$6,196</td><td class="num pos">$19,930</td><td class="num pos">$34,070</td></tr>
-        <tr><td>2% revenue share</td><td class="num">$5,895</td><td class="num">$19,227</td><td class="num">$32,966</td></tr>
-        <tr><td>4% philanthropic</td><td class="num">$5,293</td><td class="num">$17,822</td><td class="num">$30,758</td></tr>
-        <tr><td>5% (worst-case midpoint)</td><td class="num">$4,992</td><td class="num">$17,119</td><td class="num">$29,653</td></tr>
-        <tr class="total"><td>Monthly equivalent (1% fee)</td><td class="num">$516</td><td class="num">$1,661</td><td class="num">$2,839</td></tr>
-      </table>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="v">$19,930</div><div class="l">Medium tier net / unit / year — 1% fee</div></div>
-      <div class="stat"><div class="v">$1,661</div><div class="l">Medium tier monthly cash — 1% fee</div></div>
-      <div class="stat"><div class="v">$6,196 – $34,070</div><div class="l">Full range across tiers at 1% fee</div></div>
-    </div>
-  </section>
+      <a class="card-link" href="placement.html">
+        <div class="k">Document 02</div>
+        <h3>In-Building Placement Matrix</h3>
+        <p>Foot traffic plotted against purchase intent across seven hospital zones, the prime placement window, and the timing patterns — visitor peak, shift-change surges, and the hours the gift shop is dark.</p>
+        <div class="go">Open the placement matrix &#8594;</div>
+      </a>
 
-  <section>
-    <div class="eyebrow">Year-1 Ramp — Medium Tier</div>
-    <h2>New Placements Do Not Open at Full Speed</h2>
-    <div class="context">Ramp schedule: 50% volume in the first quarter, 75% in the second, full run-rate from month 7 — blended 81.25% of steady state. Shown for the medium tier at 1% fee.</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Metric</th><th class="num">Year 1 (Ramped)</th><th class="num">Steady State</th></tr>
-        <tr><td>Net income (1% fee)</td><td class="num pos">$15,799</td><td class="num pos">$19,930</td></tr>
-        <tr><td>Net after Value Line financing ($3,638/yr)</td><td class="num">$12,161</td><td class="num">$16,291</td></tr>
-      </table>
     </div>
-  </section>
 
-  <section>
-    <div class="eyebrow">Financing Coverage</div>
-    <h2>Does Every Tier Carry the Machine?</h2>
-    <div class="context">Value Line $14,950 at 60 months / 8% APR = $303/month, $3,638/year. The question for each tier: does net income cover the payment, and by how much?</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Metric — 1% fee</th><th class="num">Low — 1.5/day</th><th class="num">Medium — 3.5/day</th><th class="num">High — 5.5/day</th></tr>
-        <tr><td>Net after financing / year</td><td class="num">$2,558</td><td class="num pos">$16,292</td><td class="num pos">$30,432</td></tr>
-        <tr><td>Net after financing / month</td><td class="num">$213</td><td class="num">$1,358</td><td class="num">$2,536</td></tr>
-        <tr class="total"><td>Payment coverage</td><td class="num">1.7×</td><td class="num">5.5×</td><td class="num">9.4×</td></tr>
-        <tr><td>Simple payback (cash purchase)</td><td class="num">~29 months</td><td class="num">~9 months</td><td class="num">~5–6 months</td></tr>
-      </table>
-    </div>
-    <span class="note block">Every tier covers financing. The low tier is thin — which is why placement selection and the relocation option matter in the agreement.</span>
-  </section>
-
-  <section>
-    <div class="eyebrow">10-Unit Fleet — Medium Tier</div>
-    <h2>The Full Program at Partner Pricing</h2>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Metric — 1% fee, medium tier</th><th class="num">Year 1 (Ramped)</th><th class="num">Steady State</th></tr>
-        <tr><td>Annual net income (10 units)</td><td class="num pos">$157,990</td><td class="num pos">$199,294</td></tr>
-        <tr><td>Monthly net income (10 units)</td><td class="num">$13,166</td><td class="num">$16,608</td></tr>
-        <tr><td>Hardware investment (Value Line ×10)</td><td class="num neg">($149,500)</td><td class="num">—</td></tr>
-        <tr class="total"><td>Simple ROI on hardware</td><td class="num">106%</td><td class="num">133%</td></tr>
-      </table>
-    </div>
-    <div class="context" style="margin-top:14px">A realistic fleet is a mix of tiers, not ten medium units. Five medium + three high + two low at 1% fee ≈ $214,000/year steady state — placement selection is the fleet-level profit driver.</div>
-  </section>
-
-  <section>
-    <div class="eyebrow">Scenario Alignment</div>
-    <h2>Notes on the Worst-Case Scenario Model</h2>
-    <div class="context">The worst-case document is a useful stress frame, and showing negative cells builds confidence. Two refinements would make it a shared planning basis.</div>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Item</th><th>Suggested refinement</th></tr>
-        <tr><td>Price / volume correlation</td><td>Low-volume scenarios should pair with conservative pricing rather than the $82.50 premium average — slow placements rarely command top-of-range prices.</td></tr>
-        <tr><td>Spoilage at low volume</td><td>Shrink rises as turns slow; adding a tiered spoilage line (we model 15% at 1.5/day) would make the floor scenarios more robust.</td></tr>
-        <tr><td>Restocking labor</td><td>The cleaning-route synergy is real; we are running a time study to establish the true marginal cost and will share the result.</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <div class="eyebrow">Open Research Items</div>
-    <h2>To Close Before Contract</h2>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Item</th><th>Owner</th><th>Question</th></tr>
-        <tr><td>Card processing rate</td><td>Dane + bank</td><td>Actual unattended card-not-present rate for this merchant category</td></tr>
-        <tr><td>Restocking labor cost</td><td>Siloa ops</td><td>Time study: minutes per visit × visits per week on existing routes</td></tr>
-        <tr><td>Electricity</td><td>Dane</td><td>Validate $250/yr against unit kWh spec; confirm whether Siloa or host pays</td></tr>
-        <tr><td>Insurance rider</td><td>Siloa agent</td><td>Endorsement quote + additional-insured certificate for hospital vendor file</td></tr>
-        <tr><td>Software waiver</td><td>Dane + HyperVend</td><td>NOC waiver in writing</td></tr>
-        <tr><td>Supply chain structure</td><td>Joint</td><td>Independent sourcing, HyperVend supply program, or hybrid — the largest single driver of unit economics and the key alignment item</td></tr>
-      </table>
-    </div>
-    <div class="callout blue">
-      <h3>Where this leaves us</h3>
-      <span class="note" style="font-size:20px; color:#1470AF">On shared conservative assumptions the business clears financing at every volume tier. Supply chain structure and placement selection are the two items that turn a good model into a great program — both are on the table for our next conversation.</span>
+    <div class="callout blue" style="margin-top:30px">
+      <h3>Shared notes on both documents</h3>
+      <p>The pro forma and the placement matrix each carry a shared sticky-note layer. Enter the review passphrase once and the toolbar appears at the bottom right: pick your name, place a note anywhere on the page, drag it where it belongs, and it shows up for anyone else reading the same page within a couple of seconds. Notes stay with the page they were left on, and the whole set can be exported to a text file.</p>
+      <p>The documents themselves are readable without the passphrase — it only controls the note layer.</p>
     </div>
   </section>
 
   <footer>
-    All projections are estimates based on stated assumptions. Actual results will vary by location, foot traffic, product mix, and operational efficiency. This document is not a guarantee of performance.<br><br>
-    <b>Working draft prepared by Siloa Facility Services for joint review with HyperVend</b> — v2.0 — August 2026 — CONFIDENTIAL<br>
-    Source documents: HyperVend / Sunflower Technologies Unit Economics Model and Worst Case Scenario Model (August 2026)
+    All projections are estimates based on stated assumptions. Actual results will vary by location, foot traffic, product mix, and operational efficiency. Nothing here is a guarantee of performance.<br><br>
+    <b>Joint working document — Siloa × HyperVend</b> — August 2026
   </footer>
 
 </div>
-<!-- ===== SHARED NOTES — GitHub-backed, visible to everyone on this link ===== -->
-<style>
-  .sn-bar { position: fixed; bottom: 22px; right: 22px; z-index: 1000; display: flex; gap: 10px; align-items: center;
-    background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 4px 18px rgba(16,32,48,0.18);
-    padding: 10px 14px; font-family: 'Poppins', sans-serif; }
-  .sn-bar b { font-family: 'Manrope', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); }
-  .sn-count { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 12px; background: var(--blue); color: #fff; border-radius: 20px; padding: 2px 9px; }
-  .sn-b { border: none; border-radius: 8px; padding: 8px 13px; cursor: pointer; font-family: 'Manrope', sans-serif;
-    font-weight: 700; font-size: 13px; background: var(--shade); color: var(--ink); text-decoration: none; display: inline-block; }
-  .sn-b.pri { background: var(--blue); color: #fff; }
-  .sn-panel { position: fixed; top: 0; right: 0; width: 400px; max-width: 92vw; height: 100%; background: #fff;
-    border-left: 1px solid var(--line); box-shadow: -6px 0 26px rgba(16,32,48,0.16); z-index: 1001;
-    display: flex; flex-direction: column; transform: translateX(100%); transition: transform .22s ease; }
-  .sn-panel.open { transform: translateX(0); }
-  .sn-head { padding: 18px 20px; border-bottom: 2px solid var(--steel); display: flex; justify-content: space-between; align-items: center; }
-  .sn-head h3 { font-family: 'Manrope', sans-serif; font-size: 16px; color: var(--blue); margin: 0; }
-  .sn-x { border: none; background: none; font-size: 24px; line-height: 1; cursor: pointer; color: var(--gray); }
-  .sn-list { flex: 1; overflow-y: auto; padding: 16px 20px; }
-  .sn-item { border: 1px solid var(--line); border-left: 3px solid var(--steel); border-radius: 0 8px 8px 0;
-    padding: 12px 14px; margin-bottom: 14px; background: var(--bg); }
-  .sn-who { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); }
-  .sn-when { font-size: 11px; color: var(--gray); margin-left: 6px; }
-  .sn-body { font-size: 14px; margin-top: 6px; white-space: pre-wrap; overflow-wrap: break-word; }
-  .sn-foot { padding: 14px 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--gray); line-height: 1.45; }
-  .sn-msg { font-size: 13.5px; color: var(--gray); padding: 10px 0; line-height: 1.5; }
-  @media print { .sn-bar, .sn-panel { display: none; } }
-</style>
-
-<div class="sn-bar">
-  <b>Shared notes</b>
-  <span class="sn-count" id="snCount">&middot;</span>
-  <button class="sn-b" onclick="snOpen()">Read</button>
-  <a class="sn-b pri" id="snAdd" href="#" target="_blank" rel="noopener">Add a note</a>
-</div>
-
-<div class="sn-panel" id="snPanel">
-  <div class="sn-head"><h3>Review notes</h3><button class="sn-x" onclick="snClose()" aria-label="Close">&times;</button></div>
-  <div class="sn-list" id="snList"><div class="sn-msg">Loading notes&hellip;</div></div>
-  <div class="sn-foot">Everyone with this link sees these notes. Post one via <b>Add a note</b> &mdash; it appears here on reload.</div>
-</div>
-
-<script>
-(function(){
-  var REPO = "dane-lang/siloa-hypervend-review", ISSUE = 1;
-  var API = "https://api.github.com/repos/" + REPO + "/issues/" + ISSUE;
-  var WEB = "https://github.com/" + REPO + "/issues/" + ISSUE;
-  document.getElementById("snAdd").href = WEB;
-  window.snOpen  = function(){ document.getElementById("snPanel").classList.add("open"); };
-  window.snClose = function(){ document.getElementById("snPanel").classList.remove("open"); };
-  document.addEventListener("keydown", function(e){ if(e.key === "Escape") snClose(); });
-
-  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
-    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
-  function when(t){ try { return new Date(t).toLocaleString(); } catch(e){ return ""; } }
-  function card(n){
-    return '<div class="sn-item"><span class="sn-who">' + esc(n.user && n.user.login) +
-      '</span><span class="sn-when">' + when(n.created_at) + '</span>' +
-      '<div class="sn-body">' + esc(n.body) + '</div></div>';
-  }
-  function fail(msg){
-    document.getElementById("snCount").textContent = "!";
-    document.getElementById("snList").innerHTML = '<div class="sn-msg">' + esc(msg) +
-      ' <a href="' + WEB + '" target="_blank" rel="noopener">Open the notes thread on GitHub</a>.</div>';
-  }
-  function get(u){ return fetch(u, {cache:"no-store"}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }); }
-
-  Promise.all([ get(API), get(API + "/comments?per_page=100") ]).then(function(res){
-    var all = [];
-    if (res[0] && res[0].body && res[0].body.trim()) all.push(res[0]);
-    all = all.concat(res[1] || []);
-    document.getElementById("snCount").textContent = all.length;
-    document.getElementById("snList").innerHTML = all.length
-      ? all.map(card).join("")
-      : '<div class="sn-msg">No notes yet.</div>';
-  }).catch(function(e){
-    fail(String(e.message) === "403"
-      ? "GitHub rate limit reached from this network. Try again in a few minutes."
-      : "Could not load notes right now.");
-  });
-})();
-</script>
 
 </body>
 </html>
