@@ -218,184 +218,85 @@
   </footer>
 
 </div>
-<!-- ===== STICKY NOTES LAYER ===== -->
+<!-- ===== SHARED NOTES — GitHub-backed, visible to everyone on this link ===== -->
 <style>
-  .sn-toolbar {
-    position: fixed; bottom: 22px; right: 22px; z-index: 1000;
-    display: flex; gap: 10px; align-items: center;
-    background: #fff; border: 1px solid var(--line); border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(16,32,48,0.18); padding: 10px 14px;
-    font-family: 'Poppins', sans-serif;
-  }
-  .sn-toolbar b { font-family: 'Manrope', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); margin-right: 2px; }
-  .sn-btn {
-    border: none; border-radius: 8px; padding: 8px 13px; cursor: pointer;
-    font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 13px;
-    transition: transform .08s;
-  }
-  .sn-btn:active { transform: scale(.95); }
-  .sn-btn.a1 { background: #dcecf8; color: #0d5586; }
-  .sn-btn.a2 { background: #fdf3d1; color: #8a6d00; }
-  .sn-btn.a3 { background: #e5f5e9; color: #1e6b38; }
-  .sn-btn.a1.active { background: var(--blue); color: #fff; }
-  .sn-btn.a2.active { background: #e8b902; color: #fff; }
-  .sn-btn.a3.active { background: #2e9e57; color: #fff; }
-  .sn-btn.util { background: var(--shade); color: var(--ink); }
-  .sn-btn.addmode { background: #C0392B; color: #fff; }
-  .sn-hint { font-size: 12px; color: var(--gray); max-width: 150px; line-height: 1.3; }
-
-  .sticky {
-    position: absolute; width: 210px; min-height: 110px; z-index: 900;
-    padding: 10px 12px 26px; border-radius: 4px;
-    font-family: 'Caveat', cursive; font-size: 18px; line-height: 1.25;
-    box-shadow: 2px 4px 12px rgba(0,0,0,.22);
-    transform: rotate(-1deg); cursor: grab;
-  }
-  .sticky:nth-child(even) { transform: rotate(1.2deg); }
-  .sticky.a1 { background: #d6eafb; border-top: 14px solid #9cc9ea; }
-  .sticky.a2 { background: #fef4c0; border-top: 14px solid #f3d95a; }
-  .sticky.a3 { background: #d9f2e1; border-top: 14px solid #8fd6a8; }
-  .sticky .sn-author {
-    position: absolute; top: -12px; left: 8px;
-    font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 10px;
-    letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.55);
-  }
-  .sticky textarea {
-    width: 100%; min-height: 74px; border: none; background: transparent;
-    font-family: inherit; font-size: inherit; line-height: inherit;
-    resize: vertical; outline: none; color: #222;
-  }
-  .sticky .sn-del {
-    position: absolute; bottom: 4px; right: 8px; border: none; background: none;
-    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
-    color: rgba(0,0,0,.45); cursor: pointer;
-  }
-  .sticky .sn-del:hover { color: #C0392B; }
-  body.sn-adding { cursor: crosshair; }
-  body.sn-adding .page::after {
-    content: "Click anywhere to place a note — Esc to cancel";
-    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-    background: #C0392B; color: #fff; font-family: 'Manrope', sans-serif;
-    font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 20px;
-    z-index: 1001; box-shadow: 0 3px 10px rgba(0,0,0,.25);
-  }
-  @media print { .sn-toolbar { display: none; } }
+  .sn-bar { position: fixed; bottom: 22px; right: 22px; z-index: 1000; display: flex; gap: 10px; align-items: center;
+    background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 4px 18px rgba(16,32,48,0.18);
+    padding: 10px 14px; font-family: 'Poppins', sans-serif; }
+  .sn-bar b { font-family: 'Manrope', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); }
+  .sn-count { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 12px; background: var(--blue); color: #fff; border-radius: 20px; padding: 2px 9px; }
+  .sn-b { border: none; border-radius: 8px; padding: 8px 13px; cursor: pointer; font-family: 'Manrope', sans-serif;
+    font-weight: 700; font-size: 13px; background: var(--shade); color: var(--ink); text-decoration: none; display: inline-block; }
+  .sn-b.pri { background: var(--blue); color: #fff; }
+  .sn-panel { position: fixed; top: 0; right: 0; width: 400px; max-width: 92vw; height: 100%; background: #fff;
+    border-left: 1px solid var(--line); box-shadow: -6px 0 26px rgba(16,32,48,0.16); z-index: 1001;
+    display: flex; flex-direction: column; transform: translateX(100%); transition: transform .22s ease; }
+  .sn-panel.open { transform: translateX(0); }
+  .sn-head { padding: 18px 20px; border-bottom: 2px solid var(--steel); display: flex; justify-content: space-between; align-items: center; }
+  .sn-head h3 { font-family: 'Manrope', sans-serif; font-size: 16px; color: var(--blue); margin: 0; }
+  .sn-x { border: none; background: none; font-size: 24px; line-height: 1; cursor: pointer; color: var(--gray); }
+  .sn-list { flex: 1; overflow-y: auto; padding: 16px 20px; }
+  .sn-item { border: 1px solid var(--line); border-left: 3px solid var(--steel); border-radius: 0 8px 8px 0;
+    padding: 12px 14px; margin-bottom: 14px; background: var(--bg); }
+  .sn-who { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); }
+  .sn-when { font-size: 11px; color: var(--gray); margin-left: 6px; }
+  .sn-body { font-size: 14px; margin-top: 6px; white-space: pre-wrap; overflow-wrap: break-word; }
+  .sn-foot { padding: 14px 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--gray); line-height: 1.45; }
+  .sn-msg { font-size: 13.5px; color: var(--gray); padding: 10px 0; line-height: 1.5; }
+  @media print { .sn-bar, .sn-panel { display: none; } }
 </style>
 
-<div class="sn-toolbar">
-  <b>Notes</b>
-  <button class="sn-btn a1 active" id="sn-a1" onclick="snAuthor('a1')">Stakeholder</button>
-  <button class="sn-btn a2" id="sn-a2" onclick="snAuthor('a2')">HyperVend</button>
-  <button class="sn-btn a3" id="sn-a3" onclick="snAuthor('a3')">Other</button>
-  <button class="sn-btn util" id="sn-add" onclick="snToggleAdd()">+ Add note</button>
-  <button class="sn-btn util" onclick="snExport()">Export</button>
-  <span class="sn-hint">Drag to move. Notes save in this browser.</span>
+<div class="sn-bar">
+  <b>Shared notes</b>
+  <span class="sn-count" id="snCount">&middot;</span>
+  <button class="sn-b" onclick="snOpen()">Read</button>
+  <a class="sn-b pri" id="snAdd" href="#" target="_blank" rel="noopener">Add a note</a>
+</div>
+
+<div class="sn-panel" id="snPanel">
+  <div class="sn-head"><h3>Review notes</h3><button class="sn-x" onclick="snClose()" aria-label="Close">&times;</button></div>
+  <div class="sn-list" id="snList"><div class="sn-msg">Loading notes&hellip;</div></div>
+  <div class="sn-foot">Everyone with this link sees these notes. Post one via <b>Add a note</b> &mdash; it appears here on reload.</div>
 </div>
 
 <script>
 (function(){
-  var author = 'a1';
-  var AUTHORS = { a1: 'Stakeholder', a2: 'HyperVend', a3: 'Other' };
-  var adding = false;
-  var notes = [];
-  var seq = 1;
-  var KEY = 'siloa_proforma_notes_v2_' + (document.title.indexOf('Internal')>-1 ? 'int' : 'ext');
+  var REPO = "dane-lang/siloa-hypervend-review", ISSUE = 1;
+  var API = "https://api.github.com/repos/" + REPO + "/issues/" + ISSUE;
+  var WEB = "https://github.com/" + REPO + "/issues/" + ISSUE;
+  document.getElementById("snAdd").href = WEB;
+  window.snOpen  = function(){ document.getElementById("snPanel").classList.add("open"); };
+  window.snClose = function(){ document.getElementById("snPanel").classList.remove("open"); };
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") snClose(); });
 
-  function store(){
-    try { localStorage.setItem(KEY, JSON.stringify(notes)); } catch(e){}
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+  function when(t){ try { return new Date(t).toLocaleString(); } catch(e){ return ""; } }
+  function card(n){
+    return '<div class="sn-item"><span class="sn-who">' + esc(n.user && n.user.login) +
+      '</span><span class="sn-when">' + when(n.created_at) + '</span>' +
+      '<div class="sn-body">' + esc(n.body) + '</div></div>';
   }
-  function load(){
-    try {
-      var raw = localStorage.getItem(KEY);
-      if(raw){ notes = JSON.parse(raw); notes.forEach(render); seq = notes.length + 1; }
-    } catch(e){}
+  function fail(msg){
+    document.getElementById("snCount").textContent = "!";
+    document.getElementById("snList").innerHTML = '<div class="sn-msg">' + esc(msg) +
+      ' <a href="' + WEB + '" target="_blank" rel="noopener">Open the notes thread on GitHub</a>.</div>';
   }
+  function get(u){ return fetch(u, {cache:"no-store"}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }); }
 
-  window.snAuthor = function(a){
-    author = a;
-    ['a1','a2','a3'].forEach(function(k){
-      document.getElementById('sn-'+k).classList.toggle('active', a===k);
-    });
-  };
-
-  window.snToggleAdd = function(){
-    adding = !adding;
-    document.body.classList.toggle('sn-adding', adding);
-    var b = document.getElementById('sn-add');
-    b.classList.toggle('addmode', adding);
-    b.textContent = adding ? 'Cancel' : '+ Add note';
-  };
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && adding) snToggleAdd();
+  Promise.all([ get(API), get(API + "/comments?per_page=100") ]).then(function(res){
+    var all = [];
+    if (res[0] && res[0].body && res[0].body.trim()) all.push(res[0]);
+    all = all.concat(res[1] || []);
+    document.getElementById("snCount").textContent = all.length;
+    document.getElementById("snList").innerHTML = all.length
+      ? all.map(card).join("")
+      : '<div class="sn-msg">No notes yet.</div>';
+  }).catch(function(e){
+    fail(String(e.message) === "403"
+      ? "GitHub rate limit reached from this network. Try again in a few minutes."
+      : "Could not load notes right now.");
   });
-
-  document.addEventListener('click', function(e){
-    if(!adding) return;
-    if(e.target.closest('.sn-toolbar') || e.target.closest('.sticky')) return;
-    var n = {
-      id: 'n' + Date.now() + '_' + (seq++),
-      author: author,
-      x: e.pageX - 105,
-      y: e.pageY - 20,
-      text: ''
-    };
-    notes.push(n); render(n); store(); snToggleAdd();
-    var el = document.getElementById(n.id);
-    if(el) el.querySelector('textarea').focus();
-  });
-
-  function render(n){
-    var d = document.createElement('div');
-    d.className = 'sticky ' + n.author;
-    d.id = n.id;
-    d.style.left = n.x + 'px';
-    d.style.top = n.y + 'px';
-    d.innerHTML =
-      '<span class="sn-author">' + (AUTHORS[n.author] || n.author) + '</span>' +
-      '<textarea placeholder="Write a note...">' + (n.text||'').replace(/</g,'&lt;') + '</textarea>' +
-      '<button class="sn-del">delete</button>';
-    document.body.appendChild(d);
-
-    d.querySelector('textarea').addEventListener('input', function(){
-      n.text = this.value; store();
-    });
-    d.querySelector('.sn-del').addEventListener('click', function(){
-      notes = notes.filter(function(x){ return x.id !== n.id; });
-      d.remove(); store();
-    });
-
-    // drag
-    var sx, sy, ox, oy, dragging = false;
-    d.addEventListener('mousedown', function(e){
-      if(e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') return;
-      dragging = true; sx = e.pageX; sy = e.pageY; ox = n.x; oy = n.y;
-      d.style.cursor = 'grabbing'; e.preventDefault();
-    });
-    document.addEventListener('mousemove', function(e){
-      if(!dragging) return;
-      n.x = ox + (e.pageX - sx); n.y = oy + (e.pageY - sy);
-      d.style.left = n.x + 'px'; d.style.top = n.y + 'px';
-    });
-    document.addEventListener('mouseup', function(){
-      if(dragging){ dragging = false; d.style.cursor = 'grab'; store(); }
-    });
-  }
-
-  window.snExport = function(){
-    if(!notes.length){ alert('No notes to export yet.'); return; }
-    var lines = ['SILOA x HYPERVEND — PRO FORMA REVIEW NOTES', 'Exported: ' + new Date().toLocaleString(), ''];
-    notes.forEach(function(n, i){
-      lines.push((i+1) + '. [' + (AUTHORS[n.author] || n.author) + '] ' + (n.text || '(empty)'));
-    });
-    var blob = new Blob([lines.join('\n')], {type:'text/plain'});
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'proforma_review_notes.txt';
-    a.click();
-  };
-
-  load();
 })();
 </script>
 
