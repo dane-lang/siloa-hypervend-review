@@ -52,6 +52,7 @@ let author   = "siloa";
 let armed    = false;
 let openId   = null;        // thread showing in the panel
 let openedAt = 0;           // when it was requested — a new note opens before its snapshot lands
+let rendered = null;        // thread id currently built in the panel DOM
 let filter   = "open";      // open | all | mine | unread
 let lastSeen = 0;
 let ui       = null;
@@ -381,6 +382,7 @@ function closePanel() {
   ui.panel.classList.remove("open");
   document.body.classList.remove("sn-panel-open");
   openId = null;
+  rendered = null;
   document.querySelectorAll(".sn-lit").forEach(e => e.classList.remove("sn-lit"));
 }
 function markSeen() {
@@ -414,6 +416,7 @@ function paintPanel() {
     openId = null;
   }
 
+  rendered = null;
   if (!list.length) {
     ui.body.innerHTML = '<p class="sn-empty">Nothing here. Use <b>+ Add note</b> to start a thread, ' +
       "or switch to <b>All</b>.</p>";
@@ -441,6 +444,7 @@ function paintPanel() {
 function openThread(id) {
   openId = id;
   openedAt = Date.now();
+  rendered = null;                 // force a fresh build, and allow one scroll
   if (!ui.panel.classList.contains("open")) {
     ui.panel.classList.add("open");
     document.body.classList.add("sn-panel-open");
@@ -452,11 +456,17 @@ function openThread(id) {
 function paintThread(id) {
   const d = docs.get(id);
   if (!d) { openId = null; paintPanel(); return; }
+
+  /* Already built? Patch in place. Rebuilding would destroy the element the
+     user is typing in — the debounced save round-trips through onSnapshot,
+     so a full re-render every keystroke-pause stole focus and re-scrolled. */
+  if (rendered === id && ui.body.querySelector(".sn-thread")) { patchThread(id, d); return; }
+
   const st = statusOf(d);
   const anchor = d.anchorLabel || labelFor(d.anchor);
   const replies = repliesOf(id);
 
-  /* highlight what this thread is about, and bring it into view */
+  /* highlight what this thread is about, and bring it into view — on open only */
   document.querySelectorAll(".sn-lit").forEach(e => e.classList.remove("sn-lit"));
   if (d.anchor) {
     const el = document.querySelector(`[data-anchor="${CSS.escape(d.anchor)}"]`);
@@ -524,6 +534,46 @@ function paintThread(id) {
       t = setTimeout(() => write(id, { text: rootBody.innerText.slice(0, MAX_TEXT) }), DEBOUNCE);
     });
   }
+  rendered = id;
+}
+
+/* Update an already-rendered thread without touching what has focus. */
+function patchThread(id, d) {
+  const st = statusOf(d);
+  ui.body.querySelectorAll("[data-st]").forEach(b => {
+    const on = b.dataset.st === st;
+    b.classList.toggle("on", on);
+    Object.keys(STATUS).forEach(k => b.classList.toggle(k, on && k === st));
+  });
+
+  const thread = ui.body.querySelector(".sn-thread");
+  const setBody = (el, text) => {
+    if (!el || el === document.activeElement || el.contains(document.activeElement)) return;
+    if (el.textContent !== text) el.textContent = text;
+  };
+  setBody(thread.querySelector(".sn-msg.root .sn-msg-body"), String(d.text || ""));
+
+  const live = repliesOf(id);
+  const have = new Map([...thread.querySelectorAll(".sn-msg:not(.root)")].map(n => [n.dataset.id, n]));
+  live.forEach(([rid, r]) => {
+    const node = have.get(rid);
+    if (node) { setBody(node.querySelector(".sn-msg-body"), String(r.text || "")); have.delete(rid); }
+    else {
+      const el = document.createElement("div");
+      el.className = "sn-msg";
+      el.dataset.id = rid;
+      el.innerHTML =
+        `<div class="sn-msg-top"><span class="sn-chip ${who(r.author)}">${AUTHORS[who(r.author)]}</span>` +
+        `<span class="sn-time">${when(millis(r))}</span>` +
+        (who(r.author) === author ? `<button class="sn-del" data-del="${rid}" title="Delete">&times;</button>` : "") +
+        `</div><div class="sn-msg-body"></div>`;
+      el.querySelector(".sn-msg-body").textContent = String(r.text || "");
+      const del = el.querySelector("[data-del]");
+      if (del) del.addEventListener("click", () => removeNote(rid, id));
+      thread.appendChild(el);
+    }
+  });
+  have.forEach(node => node.remove());   /* deleted elsewhere */
 }
 
 /* ============================================================
