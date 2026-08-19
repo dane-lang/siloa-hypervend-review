@@ -1,0 +1,338 @@
+{
+  "proforma": [
+    {
+      "id": "model-assumptions-v2-0",
+      "label": "Model Assumptions — v2.0",
+      "heading": "What Changed and What Is Still Open",
+      "rows": [
+        {
+          "id": "model-assumptions-v2-0--volume-tiers",
+          "label": "Volume tiers"
+        },
+        {
+          "id": "model-assumptions-v2-0--average-bouquet-sale-price",
+          "label": "Average bouquet sale price"
+        },
+        {
+          "id": "model-assumptions-v2-0--average-bouquet-cost-cogs",
+          "label": "Average bouquet cost (COGS)"
+        },
+        {
+          "id": "model-assumptions-v2-0--gross-margin-per-bouquet",
+          "label": "Gross margin per bouquet"
+        },
+        {
+          "id": "model-assumptions-v2-0--spoilage-tiered",
+          "label": "Spoilage — tiered"
+        },
+        {
+          "id": "model-assumptions-v2-0--card-processing",
+          "label": "Card processing"
+        },
+        {
+          "id": "model-assumptions-v2-0--restocking-labor",
+          "label": "Restocking labor"
+        },
+        {
+          "id": "model-assumptions-v2-0--electricity",
+          "label": "Electricity"
+        },
+        {
+          "id": "model-assumptions-v2-0--maintenance-parts",
+          "label": "Maintenance & parts"
+        },
+        {
+          "id": "model-assumptions-v2-0--insurance-rider",
+          "label": "Insurance rider"
+        },
+        {
+          "id": "model-assumptions-v2-0--software-noc",
+          "label": "Software / NOC"
+        }
+      ]
+    },
+    {
+      "id": "annual-p-l-by-volume-tier",
+      "label": "Annual P&L by Volume Tier",
+      "heading": "What One Machine Makes at Each Tier",
+      "rows": [
+        {
+          "id": "annual-p-l-by-volume-tier--bouquets-sold-year",
+          "label": "Bouquets sold / year"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--gross-revenue",
+          "label": "Gross revenue"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--cogs-bouquets-sold",
+          "label": "COGS (bouquets sold)"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--spoilage-15-10-8",
+          "label": "Spoilage (15% / 10% / 8%)"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--gross-profit",
+          "label": "Gross profit"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--card-processing-3",
+          "label": "Card processing (3%)"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--restocking-labor-placeholder",
+          "label": "Restocking labor (placeholder)"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--electricity",
+          "label": "Electricity"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--maintenance-parts",
+          "label": "Maintenance & parts"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--insurance-rider",
+          "label": "Insurance rider"
+        },
+        {
+          "id": "annual-p-l-by-volume-tier--net-before-hospital-fee",
+          "label": "Net before hospital fee"
+        }
+      ]
+    },
+    {
+      "id": "fee-matrix",
+      "label": "Fee Matrix",
+      "heading": "Net Income: Volume Tier × Hospital Fee",
+      "rows": [
+        {
+          "id": "fee-matrix--no-fee",
+          "label": "No fee"
+        },
+        {
+          "id": "fee-matrix--1-revenue-share",
+          "label": "1% revenue share"
+        },
+        {
+          "id": "fee-matrix--2-revenue-share",
+          "label": "2% revenue share"
+        },
+        {
+          "id": "fee-matrix--4-philanthropic",
+          "label": "4% philanthropic"
+        },
+        {
+          "id": "fee-matrix--5-worst-case-midpoint",
+          "label": "5% (worst-case midpoint)"
+        },
+        {
+          "id": "fee-matrix--monthly-equivalent-1-fee",
+          "label": "Monthly equivalent (1% fee)"
+        },
+        {
+          "id": "fee-matrix--19-930",
+          "label": "$19,930"
+        },
+        {
+          "id": "fee-matrix--1-661",
+          "label": "$1,661"
+        },
+        {
+          "id": "fee-matrix--6-196-34-070",
+          "label": "$6,196 – $34,070"
+        }
+      ]
+    },
+    {
+      "id": "year-1-ramp-medium-tier",
+      "label": "Year-1 Ramp — Medium Tier",
+      "heading": "New Placements Do Not Open at Full Speed",
+      "rows": [
+        {
+          "id": "year-1-ramp-medium-tier--net-income-1-fee",
+          "label": "Net income (1% fee)"
+        },
+        {
+          "id": "year-1-ramp-medium-tier--net-after-value-line-financing-3-638-yr",
+          "label": "Net after Value Line financing ($3,638/yr)"
+        }
+      ]
+    },
+    {
+      "id": "financing-coverage",
+      "label": "Financing Coverage",
+      "heading": "Does Every Tier Carry the Machine?",
+      "rows": [
+        {
+          "id": "financing-coverage--net-after-financing-year",
+          "label": "Net after financing / year"
+        },
+        {
+          "id": "financing-coverage--net-after-financing-month",
+          "label": "Net after financing / month"
+        },
+        {
+          "id": "financing-coverage--payment-coverage",
+          "label": "Payment coverage"
+        },
+        {
+          "id": "financing-coverage--simple-payback-cash-purchase",
+          "label": "Simple payback (cash purchase)"
+        }
+      ]
+    },
+    {
+      "id": "10-unit-fleet-medium-tier",
+      "label": "10-Unit Fleet — Medium Tier",
+      "heading": "The Full Program at Partner Pricing",
+      "rows": [
+        {
+          "id": "10-unit-fleet-medium-tier--annual-net-income-10-units",
+          "label": "Annual net income (10 units)"
+        },
+        {
+          "id": "10-unit-fleet-medium-tier--monthly-net-income-10-units",
+          "label": "Monthly net income (10 units)"
+        },
+        {
+          "id": "10-unit-fleet-medium-tier--hardware-investment-value-line-10",
+          "label": "Hardware investment (Value Line ×10)"
+        },
+        {
+          "id": "10-unit-fleet-medium-tier--simple-roi-on-hardware",
+          "label": "Simple ROI on hardware"
+        }
+      ]
+    },
+    {
+      "id": "scenario-alignment",
+      "label": "Scenario Alignment",
+      "heading": "Notes on the Worst-Case Scenario Model",
+      "rows": [
+        {
+          "id": "scenario-alignment--price-volume-correlation",
+          "label": "Price / volume correlation"
+        },
+        {
+          "id": "scenario-alignment--spoilage-at-low-volume",
+          "label": "Spoilage at low volume"
+        },
+        {
+          "id": "scenario-alignment--restocking-labor",
+          "label": "Restocking labor"
+        }
+      ]
+    },
+    {
+      "id": "open-research-items",
+      "label": "Open Research Items",
+      "heading": "To Close Before Contract",
+      "rows": [
+        {
+          "id": "open-research-items--card-processing-rate",
+          "label": "Card processing rate"
+        },
+        {
+          "id": "open-research-items--restocking-labor-cost",
+          "label": "Restocking labor cost"
+        },
+        {
+          "id": "open-research-items--electricity",
+          "label": "Electricity"
+        },
+        {
+          "id": "open-research-items--insurance-rider",
+          "label": "Insurance rider"
+        },
+        {
+          "id": "open-research-items--software-waiver",
+          "label": "Software waiver"
+        },
+        {
+          "id": "open-research-items--supply-chain-structure",
+          "label": "Supply chain structure"
+        }
+      ]
+    }
+  ],
+  "placement": [
+    {
+      "id": "traffic-intent",
+      "label": "Traffic × Intent",
+      "heading": "Not All Foot Traffic Is Worth the Same",
+      "rows": [
+        {
+          "id": "traffic-intent--maternity-womens-center",
+          "label": "Maternity & women’s center",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--surgical-procedural-waiting",
+          "label": "Surgical & procedural waiting",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--main-lobby-front-entrance",
+          "label": "Main lobby & front entrance",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--elevator-bank-main-corridor",
+          "label": "Elevator bank & main corridor",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--staff-entrance-break-area",
+          "label": "Staff entrance & break area",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--emergency-department-waiting",
+          "label": "Emergency department waiting",
+          "kind": "zone"
+        },
+        {
+          "id": "traffic-intent--cafeteria-food-court",
+          "label": "Cafeteria & food court",
+          "kind": "zone"
+        }
+      ]
+    },
+    {
+      "id": "timing",
+      "label": "Timing",
+      "heading": "When the Building Is Actually Buying",
+      "rows": [
+        {
+          "id": "timing--58-pm",
+          "label": "5–8 pm"
+        },
+        {
+          "id": "timing--7a-3p-5p-7p-11p",
+          "label": "7a · 3p · 5p · 7p · 11p"
+        },
+        {
+          "id": "timing--115-hrs-wk",
+          "label": "~115 hrs/wk"
+        }
+      ]
+    },
+    {
+      "id": "where-we-are-honest-about-the-model",
+      "label": "Where We Are Honest About the Model",
+      "heading": "Two Caveats Worth Stating Up Front",
+      "rows": [
+        {
+          "id": "where-we-are-honest-about-the-model--the-maternity-rank-is-a-pilot-hypothesis-not-a-m",
+          "label": "The maternity rank is a pilot hypothesis, not a measured result."
+        },
+        {
+          "id": "where-we-are-honest-about-the-model--visiting-hours-close-around-8-pm",
+          "label": "Visiting hours close around 8 pm."
+        }
+      ]
+    }
+  ]
+}

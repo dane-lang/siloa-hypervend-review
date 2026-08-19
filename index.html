@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-page="landing">
 
 <nav class="nav">
   <div class="nav-in">
@@ -50,10 +50,18 @@
 
     </div>
 
+  </section>
+
+  <section>
+    <div class="eyebrow">Where the review stands</div>
+    <h2>Open Items</h2>
+    <div class="context">Every note attaches to the line it is about. Open items are questions still waiting on an answer; answered means someone replied; resolved means both sides are done with it. Click any item to land on that row with the thread open.</div>
+    <div id="snDash" class="dash"></div>
+
     <div class="callout blue" style="margin-top:30px">
-      <h3>Shared notes on both documents</h3>
-      <p>The pro forma and the placement matrix each carry a shared sticky-note layer. Enter the review passphrase once and the toolbar appears at the bottom right: pick your side, place a note anywhere on the page, drag it where it belongs, and it shows up for anyone else reading the same page within a couple of seconds. Notes stay with the page they were left on, and the whole set can be exported to a text file.</p>
-      <p>The documents themselves are readable without the passphrase — it only controls the note layer.</p>
+      <h3>How the review layer works</h3>
+      <p>Enter the review passphrase once per session. On either document, <b>+ Add note</b> then click the row, zone or section you are commenting on — that row highlights as you hover, and the note stays attached to it whatever screen it is read on. Click anywhere else for a general note.</p>
+      <p>Threads open in a side panel that never covers the document. Anyone can reply, mark a thread answered or resolved, and export the full log grouped by line item. The documents themselves are readable without the passphrase — it only controls the review layer.</p>
     </div>
   </section>
 
@@ -64,5 +72,6 @@
 
 </div>
 
+<script type="module" src="assets/notes.js"></script>
 </body>
 </html>

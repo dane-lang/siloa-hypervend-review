@@ -31,7 +31,7 @@
     <hr class="rule">
   </header>
 
-  <section>
+  <section id="traffic-intent" data-anchor="traffic-intent">
     <div class="eyebrow">Traffic × Intent</div>
     <h2>Not All Foot Traffic Is Worth the Same</h2>
     <div class="context">Volume alone does not sell flowers. The zones that convert are the ones where high foot traffic overlaps with a reason to arrive carrying something. The upper-right quadrant is where a unit earns its medium and high tier numbers; the lower-right moves people past the glass without giving them an occasion.</div>
@@ -80,39 +80,39 @@
         <g font-family="Poppins, sans-serif" font-size="13" fill="#1a1d21">
 
           <!-- inside the prime zone -->
-          <g>
+          <g data-anchor="traffic-intent--maternity-womens-center">
             <circle cx="532" cy="100" r="9" fill="#1470AF"/>
             <text x="551" y="96">Maternity &amp;</text>
             <text x="551" y="112">women&#8217;s center</text>
           </g>
-          <g>
+          <g data-anchor="traffic-intent--surgical-procedural-waiting">
             <circle cx="452" cy="150" r="9" fill="#1470AF"/>
             <text x="471" y="146">Surgical &amp;</text>
             <text x="471" y="162">procedural waiting</text>
           </g>
-          <g>
+          <g data-anchor="traffic-intent--main-lobby-front-entrance">
             <circle cx="572" cy="188" r="9" fill="#1470AF"/>
             <text x="591" y="184">Main lobby &amp;</text>
             <text x="591" y="200">front entrance</text>
           </g>
-          <g>
+          <g data-anchor="traffic-intent--elevator-bank-main-corridor">
             <circle cx="613" cy="232" r="9" fill="#1470AF"/>
             <text x="632" y="228">Elevator bank &amp;</text>
             <text x="632" y="244">main corridor</text>
           </g>
 
           <!-- outside the prime zone -->
-          <g>
+          <g data-anchor="traffic-intent--staff-entrance-break-area">
             <circle cx="311" cy="320" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
             <text x="330" y="316">Staff entrance</text>
             <text x="330" y="332">&amp; break area</text>
           </g>
-          <g>
+          <g data-anchor="traffic-intent--emergency-department-waiting">
             <circle cx="680" cy="308" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
             <text x="661" y="304" text-anchor="end">Emergency</text>
             <text x="661" y="320" text-anchor="end">department waiting</text>
           </g>
-          <g>
+          <g data-anchor="traffic-intent--cafeteria-food-court">
             <circle cx="626" cy="368" r="8" fill="#ffffff" stroke="#8EB6DC" stroke-width="2.5"/>
             <text x="645" y="364">Cafeteria &amp;</text>
             <text x="645" y="380">food court</text>
@@ -130,24 +130,21 @@
     <span class="note block">Emergency department waiting is the trap: it posts the highest raw counts in the building and the lowest reason to buy. People arrive there without an occasion.</span>
   </section>
 
-  <section>
+  <section id="timing" data-anchor="timing">
     <div class="eyebrow">Timing</div>
     <h2>When the Building Is Actually Buying</h2>
     <div class="context">Placement sets the ceiling; timing sets how often that ceiling gets hit. Three patterns matter — the evening visitor window, the shift-change surges, and the hours the gift shop is not open to serve either of them.</div>
 
     <div class="stats">
-      <div class="stat">
+      <div class="stat" data-anchor="timing--58-pm">
         <div class="v">5&ndash;8 pm</div>
-        <div class="l">Peak visitor window — the densest arrival block of the day, and the one most likely to arrive empty-handed</div>
-      </div>
-      <div class="stat">
+        <div class="l">Peak visitor window — the densest arrival block of the day, and the one most likely to arrive empty-handed</div></div>
+      <div class="stat" data-anchor="timing--7a-3p-5p-7p-11p">
         <div class="v sm">7a &middot; 3p &middot; 5p &middot; 7p &middot; 11p</div>
-        <div class="l">All-shift surge times — five distinct movement peaks as the building changes over</div>
-      </div>
-      <div class="stat">
+        <div class="l">All-shift surge times — five distinct movement peaks as the building changes over</div></div>
+      <div class="stat" data-anchor="timing--115-hrs-wk">
         <div class="v">~115 hrs/wk</div>
-        <div class="l">Hours the gift shop sits dark — demand that arrives outside staffed retail hours has nowhere to go</div>
-      </div>
+        <div class="l">Hours the gift shop sits dark — demand that arrives outside staffed retail hours has nowhere to go</div></div>
     </div>
 
     <div class="callout blue">
@@ -156,17 +153,17 @@
     </div>
   </section>
 
-  <section>
+  <section id="where-we-are-honest-about-the-model" data-anchor="where-we-are-honest-about-the-model">
     <div class="eyebrow">Where We Are Honest About the Model</div>
     <h2>Two Caveats Worth Stating Up Front</h2>
     <div class="context">The grid above is a working read, not a measured result. Two points in it are assumptions we would rather name now than defend later.</div>
 
     <div class="caveats">
-      <div class="caveat">
+      <div class="caveat" data-anchor="where-we-are-honest-about-the-model--the-maternity-rank-is-a-pilot-hypothesis-not-a-m">
         <b>The maternity rank is a pilot hypothesis, not a measured result.</b>
         Placing maternity and the women&#8217;s center at the top of the intent axis reflects our reading of who walks that corridor and why. It has not been validated against unit-level sales data. The first placements should be structured to test it, and the ranking should move if the data says it belongs elsewhere.
       </div>
-      <div class="caveat">
+      <div class="caveat" data-anchor="where-we-are-honest-about-the-model--visiting-hours-close-around-8-pm">
         <b>Visiting hours close around 8 pm.</b>
         The 5&ndash;8 pm visitor window ends where visiting hours end, so the tail of that block is truncated rather than open-ended. The later surge times (7 pm and 11 pm) are staff movement, not visitors, and should be modeled as a different buyer with a different basket.
       </div>

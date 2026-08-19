@@ -1,24 +1,29 @@
-# Siloa × HyperVend — Joint Review Site
+# Siloa × HyperVend — Joint Review
 
 A three-page GitHub Pages site carrying the two working documents for the
-Siloa × HyperVend review, with a shared sticky-note layer that syncs live
+Siloa × HyperVend review, with an anchored review layer that syncs live
 across everyone who has the link.
 
-| Page | File | Notes layer |
+**Live:** https://dane-lang.github.io/siloa-hypervend-review/
+
+| Page | File | Review layer |
 |---|---|---|
-| Landing | `index.html` | — |
+| Landing — open items dashboard | `index.html` | `page: "landing"` (read-only) |
 | Unit Economics Pro Forma | `proforma.html` | `page: "proforma"` |
 | In-Building Placement Matrix | `placement.html` | `page: "placement"` |
 
 ```
 /
-├── index.html          landing — Siloa header + two document cards
-├── proforma.html       unit economics pro forma v2.0
-├── placement.html      in-building placement matrix (vendor-safe)
+├── index.html              landing — status of the review across both documents
+├── proforma.html           unit economics pro forma v2.0
+├── placement.html          in-building placement matrix (vendor-safe)
 ├── assets/
-│   ├── site.css        shared visual system
-│   ├── notes.js        sticky-note module (Firestore backed)
-│   └── firebase.js     Firebase init + config + passphrase hash
+│   ├── site.css            shared visual system + review layer
+│   ├── notes.js            review layer: anchors, threads, status, dashboard
+│   ├── firebase.js         Firebase init, config, passphrase hash
+│   └── doc-index.json      generated — the addressable map of both documents
+├── tools/
+│   └── build-anchors.py    generates the anchors and doc-index.json
 └── README.md
 ```
 
@@ -27,99 +32,127 @@ accent `#1470AF`, steel `#8EB6DC`.
 
 ---
 
-## Before this goes live — two values to paste in
+## The review layer
 
-Both live in `assets/firebase.js`. Nothing else needs to change.
+**Anchored notes.** `+ Add note`, then click the row, zone or section you are
+commenting on — it highlights as you hover. The note attaches to that element,
+so it stays with its subject at any screen width and on any device. Click
+anywhere else for a general note. Anchored rows carry a count badge, so you can
+see where the argument is without hunting.
 
-**1. `firebaseConfig`** — from the Firebase console for project
-`siloa-review-notes`: *Project settings → General → Your apps → Web app →
-SDK setup and configuration*. Replace the `PASTE_…` placeholders. Until real
-values are in, every page still renders normally and the notes toolbar
-reports "Notes — not connected" instead of erroring.
+**Threads.** A root note plus a flat list of replies. One level deep on
+purpose — deeper nesting stops being readable. Threads open in a side panel
+that never covers the document, so you can read the figure and the argument at
+the same time.
 
-**2. `PASSPHRASE_SHA256`** — currently the hash of the placeholder
-passphrase `SILOA-HV-2026`. To change it:
+**Status.** Open / Answered / Resolved on every thread. A reply from the other
+side moves an open thread to Answered automatically; either side can mark it
+Resolved. The landing page rolls this up into a live list of what is still
+outstanding on each document.
+
+**Unread.** Threads with activity you have not seen since your last visit are
+flagged in the panel, on the badge and on the dashboard.
+
+**Export.** A plain-text thread log grouped by line item, with status,
+authors, timestamps and replies. This is the artifact for the record.
+
+Notes are attributed by organisation — **Siloa** or **HyperVend** — not by
+person, so more than one reader per side can post without a note landing under
+someone else's name. `notes.js` maps the earlier personal values (`dane`,
+`guillermo`) onto the current ones on read.
+
+### Deep links
+
+`proforma.html#<anchor-id>` scrolls to that element and opens its thread. The
+dashboard's open-item list links this way.
+
+---
+
+## Anchors are generated, not hand-written
+
+`tools/build-anchors.py` reads both documents, injects a `data-anchor` on every
+section, table row, stat box, caveat and placement-grid zone, and writes
+`assets/doc-index.json` — the map the review layer uses for labels, grouping
+and the dashboard.
+
+```sh
+python3 tools/build-anchors.py           # regenerate after editing a document
+python3 tools/build-anchors.py --check   # verify in sync; exit 1 if not
+```
+
+It is idempotent and it never touches content: no figure is read, rewritten or
+derived. Presentation stays in the HTML. Run it after any edit to either
+document so anchors track the text.
+
+Anchor ids derive from heading and row text, so they survive edits that don't
+rename things. Renaming a row orphans notes attached to it — they fall back to
+their stored `anchorLabel` and keep working, but they stop highlighting.
+
+---
+
+## Data model — collection `notes`
+
+```js
+{
+  page:   "proforma" | "placement",   // the six keys the published rules require
+  author: "siloa" | "hypervend",
+  x: 0, y: 0,                         // retained for rule compatibility
+  text:   string,                     // < 2000 chars
+  ts:     serverTimestamp(),
+
+  anchor:      string | null,         // element id, null for a general note
+  anchorLabel: string | null,         // human label, snapshotted at creation
+  status:      "open" | "answered" | "resolved",   // root notes
+  parentId:    string | null,         // set on replies
+  updated:     serverTimestamp()
+}
+```
+
+The published security rules gate `create` on `hasAll` of the original six
+keys, so the added fields pass without a rules change and notes written before
+this schema stay valid — missing fields default on read. **Every write must
+keep those six keys present.**
+
+An `onSnapshot` listener filtered by `page` keeps every tab live. Text edits
+are debounced 500 ms.
+
+---
+
+## Before this goes live — two values in `assets/firebase.js`
+
+**`firebaseConfig`** — live, from web app `siloa-review-notes-web`.
+
+**`PASSPHRASE_SHA256`** — currently the hash of `SILOA-HV-2026`. To change:
 
 ```sh
 printf 'YOUR-PASSPHRASE' | sha256sum
 ```
 
-and paste the hex digest. The passphrase itself is never stored in the repo.
+and paste the digest. The passphrase itself is never stored in the repo.
 
----
+### What the passphrase does and does not do
 
-## How the notes work
-
-* A page opts in with `<body data-page="proforma">`. Pages without that
-  attribute (the landing page) get no note layer at all.
-* On the first page of a browser session the passphrase dialog appears once.
-  Accepting stores `ok` in `sessionStorage`, so it does not ask again that
-  session; dismissing leaves a small **🔒 Notes** chip in the corner. Either
-  way the document content stays fully readable — the gate covers only the
-  note layer.
-* Toolbar (bottom right): note count, **Siloa / HyperVend** author toggle,
-  **+ Add note**, **Export**.
-* **+ Add note** arms click-to-place — click anywhere on the page to drop
-  the note there, `Esc` cancels.
-* Notes drag by their coloured top bar and delete with the ×.
-* **Export** downloads a `.txt` listing every note on the current page with
-  its author, page and timestamp.
-* Author colours: Siloa `#d6eafb` / `#9cc9ea`, HyperVend `#fef4c0` / `#f3d95a`.
-  Notes are attributed by organisation, not by person — a note says which
-  side of the table it came from, so more than one reader per side can use
-  the same identity. `assets/notes.js` maps the earlier personal values
-  (`dane`, `guillermo`) onto the new ones on read.
-
-### Data model — collection `notes`
-
-```js
-{
-  page:   "proforma" | "placement",  // notes are per page
-  author: "siloa" | "hypervend",
-  x:      number,                    // pageX offset
-  y:      number,                    // pageY offset
-  text:   string,                    // < 2000 chars
-  ts:     serverTimestamp()
-}
-```
-
-An `onSnapshot` listener filtered by `page` keeps every open tab live, so a
-note created, moved, edited or deleted by any visitor appears for all of them
-without a refresh. Text edits and drag-end positions are debounced 500 ms
-before they are written, which keeps write volume trivial. A note being typed
-in or dragged locally is never overwritten by an incoming snapshot. Document
-IDs are auto-assigned; deleting a note deletes the document.
+It gates the review layer only — both documents stay fully readable without
+it. It is a curtain, not a lock: the Firebase config is in page source and the
+rules allow open read, update and delete with no authentication. Anyone with
+the link who reads the source can reach the notes. **Export regularly** — there
+is no history and no undo.
 
 ---
 
 ## Deployment
 
-GitHub Pages, `main` branch, root — no build step, everything is static.
-The Firebase SDK loads from the gstatic CDN as modular v10 ES modules, so the
-pages must be served over HTTP(S); opening the files directly from disk will
-not load the note layer (module CORS, and `crypto.subtle` needs a secure
-context).
-
-### Checking sync end to end
-
-1. Open `proforma.html` in two different browser profiles.
-2. Enter the passphrase in both.
-3. Add a note in one — it should appear in the other within about two seconds.
-4. Drag it, edit the text, then delete it, confirming each step propagates.
-5. Repeat on `placement.html`, then confirm the two pages hold separate sets.
-
----
+GitHub Pages, `main` branch, root. No build step at serve time; the anchor
+tool runs at authoring time and its output is committed. The Firebase SDK loads
+from the gstatic CDN as ES modules, so pages must be served over HTTP(S) —
+opening files from disk will not load the review layer.
 
 ## Content rule for `placement.html`
 
-`placement.html` is vendor-safe by construction. It carries the traffic ×
-intent grid, the three timing stats, the all-shift surge note and the two
-stated caveats — and nothing about internal site-selection strategy. Guard it
-with:
+Vendor-safe by construction. Guard with:
 
 ```sh
 grep -Eic 'cascade|deprioriti|warmth|auxiliary|beds|AHCA|CONFIDENTIAL' placement.html
 ```
 
-which must return `0`. The document classification on this page reads
-*Joint working document — Siloa × HyperVend*.
+which must return `0`.
