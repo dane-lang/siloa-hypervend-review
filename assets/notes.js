@@ -26,13 +26,15 @@ const PAGE = document.body.dataset.page;
 const DEBOUNCE   = 500;
 const MAX_TEXT   = 2000;
 const NOTE_W     = 216;
-const AUTHORS    = { dane: "Dane", guillermo: "Guillermo" };
+const AUTHORS    = { siloa: "Siloa", hypervend: "HyperVend" };
+/* notes written before the rename carried personal names */
+const LEGACY     = { dane: "siloa", guillermo: "hypervend" };
 const GATE_KEY   = "siloa-notes-gate";
 const AUTHOR_KEY = "siloa-notes-author";
 
 /* ---------- module state ---------- */
 const notes = new Map();          // id -> { el, ta, data, textTimer, posTimer, dragging }
-let author  = "dane";
+let author  = "siloa";
 let armed   = false;
 let ui      = null;               // built DOM refs
 let focusNext = null;             // doc id to focus once it arrives
@@ -41,8 +43,9 @@ let focusNext = null;             // doc id to focus once it arrives
    boot
    ============================================================ */
 function boot() {
-  try { author = localStorage.getItem(AUTHOR_KEY) || "dane"; } catch (e) { /* private mode */ }
-  if (!AUTHORS[author]) author = "dane";
+  try { author = localStorage.getItem(AUTHOR_KEY) || "siloa"; } catch (e) { /* private mode */ }
+  author = LEGACY[author] || author;
+  if (!AUTHORS[author]) author = "siloa";
 
   ui = buildChrome();
   wireGate();
@@ -92,8 +95,8 @@ function buildChrome() {
     '<span class="sn-label">Notes</span>' +
     '<span class="sn-count" id="snCount">0</span>' +
     '<span class="sn-who">' +
-      '<button data-author="dane">Dane</button>' +
-      '<button data-author="guillermo">Guillermo</button>' +
+      '<button data-author="siloa">Siloa</button>' +
+      '<button data-author="hypervend">HyperVend</button>' +
     '</span>' +
     '<button class="sn-b pri" id="snAdd">+ Add note</button>' +
     '<button class="sn-b" id="snExport">Export</button>';
@@ -243,7 +246,8 @@ function upsert(id, data) {
   n.data = data;
 
   /* author can change only by re-creation, but keep it honest */
-  const who = AUTHORS[data.author] ? data.author : "dane";
+  const who0 = LEGACY[data.author] || data.author;
+  const who = AUTHORS[who0] ? who0 : "siloa";
   n.el.dataset.author = who;
   n.el.querySelector(".sn-name").textContent = AUTHORS[who];
 

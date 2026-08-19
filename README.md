@@ -57,21 +57,25 @@ and paste the hex digest. The passphrase itself is never stored in the repo.
   session; dismissing leaves a small **🔒 Notes** chip in the corner. Either
   way the document content stays fully readable — the gate covers only the
   note layer.
-* Toolbar (bottom right): note count, **Dane / Guillermo** author toggle,
+* Toolbar (bottom right): note count, **Siloa / HyperVend** author toggle,
   **+ Add note**, **Export**.
 * **+ Add note** arms click-to-place — click anywhere on the page to drop
   the note there, `Esc` cancels.
 * Notes drag by their coloured top bar and delete with the ×.
 * **Export** downloads a `.txt` listing every note on the current page with
   its author, page and timestamp.
-* Author colours: Dane `#d6eafb` / `#9cc9ea`, Guillermo `#fef4c0` / `#f3d95a`.
+* Author colours: Siloa `#d6eafb` / `#9cc9ea`, HyperVend `#fef4c0` / `#f3d95a`.
+  Notes are attributed by organisation, not by person — a note says which
+  side of the table it came from, so more than one reader per side can use
+  the same identity. `assets/notes.js` maps the earlier personal values
+  (`dane`, `guillermo`) onto the new ones on read.
 
 ### Data model — collection `notes`
 
 ```js
 {
   page:   "proforma" | "placement",  // notes are per page
-  author: "dane" | "guillermo",
+  author: "siloa" | "hypervend",
   x:      number,                    // pageX offset
   y:      number,                    // pageY offset
   text:   string,                    // < 2000 chars

@@ -9,8 +9,8 @@
   --blue: #1470AF; --steel: #8EB6DC; --ink: #1a1d21; --gray: #5c6570;
   --bg: #fafbfc; --card: #ffffff; --line: #e3e8ee; --shade: #eef2f6;
   --red: #C0392B; --green-ok: #1e7a45; --amber: #fff8f0;
-  --dane-body: #d6eafb; --dane-bar: #9cc9ea;
-  --guillermo-body: #fef4c0; --guillermo-bar: #f3d95a;
+  --siloa-body: #d6eafb; --siloa-bar: #9cc9ea;
+  --hv-body: #fef4c0; --hv-bar: #f3d95a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -146,8 +146,8 @@ footer { margin-top: 56px; font-size: 12.5px; color: var(--gray); border-top: 1p
 .sn-who { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .sn-who button { border: none; background: #fff; cursor: pointer; padding: 7px 11px;
   font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12.5px; color: var(--gray); }
-.sn-who button.on[data-author="dane"] { background: var(--dane-bar); color: #10334c; }
-.sn-who button.on[data-author="guillermo"] { background: var(--guillermo-bar); color: #4a3c00; }
+.sn-who button.on[data-author="siloa"] { background: var(--siloa-bar); color: #10334c; }
+.sn-who button.on[data-author="hypervend"] { background: var(--hv-bar); color: #4a3c00; }
 
 /* placement mode */
 body.sn-placing { cursor: crosshair; }
@@ -157,13 +157,13 @@ body.sn-placing { cursor: crosshair; }
 .sn-hint.show { display: block; }
 
 /* a note */
-.sn-note { position: absolute; z-index: 700; width: 216px; border-radius: 8px; background: var(--dane-body);
+.sn-note { position: absolute; z-index: 700; width: 216px; border-radius: 8px; background: var(--siloa-body);
   box-shadow: 0 3px 12px rgba(16,32,48,0.22); overflow: hidden; }
-.sn-note[data-author="guillermo"] { background: var(--guillermo-body); }
+.sn-note[data-author="hypervend"] { background: var(--hv-body); }
 .sn-note.drag { z-index: 800; box-shadow: 0 10px 26px rgba(16,32,48,0.3); }
 .sn-note .sn-bar { display: flex; align-items: center; gap: 6px; padding: 4px 6px 4px 9px; cursor: grab;
-  background: var(--dane-bar); touch-action: none; }
-.sn-note[data-author="guillermo"] .sn-bar { background: var(--guillermo-bar); }
+  background: var(--siloa-bar); touch-action: none; }
+.sn-note[data-author="hypervend"] .sn-bar { background: var(--hv-bar); }
 .sn-note .sn-bar.grabbing { cursor: grabbing; }
 .sn-note .sn-name { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 10.5px; letter-spacing: .06em;
   text-transform: uppercase; color: #33404a; margin-right: auto; }
